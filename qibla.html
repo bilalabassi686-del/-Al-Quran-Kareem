@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Qibla Compass</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0a7b5e;
+text-align:center;
+color:white;
+}
+
+h1{
+padding:15px;
+}
+
+#compass{
+width:300px;
+height:300px;
+border:10px solid white;
+border-radius:50%;
+margin:30px auto;
+position:relative;
+background:#0f9d7a;
+}
+
+.direction{
+position:absolute;
+font-size:22px;
+font-weight:bold;
+}
+
+#north{top:10px;left:50%;transform:translateX(-50%);}
+#south{bottom:10px;left:50%;transform:translateX(-50%);}
+#east{right:10px;top:50%;transform:translateY(-50%);}
+#west{left:10px;top:50%;transform:translateY(-50%);}
+
+#needle{
+position:absolute;
+top:50%;
+left:50%;
+font-size:80px;
+transform:translate(-50%,-50%) rotate(0deg);
+transition:0.3s;
+}
+
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:8px;
+background:white;
+color:#0a7b5e;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🧭 Qibla Direction</h1>
+
+<div id="compass">
+
+<div id="north" class="direction">N</div>
+<div id="south" class="direction">S</div>
+<div id="east" class="direction">E</div>
+<div id="west" class="direction">W</div>
+
+<div id="needle">🕋</div>
+
+</div>
+
+<button onclick="startQibla()">Start Qibla</button>
+
+<script>
+
+let qibla = 0;
+
+function startQibla(){
+
+navigator.geolocation.getCurrentPosition(function(pos){
+
+let lat = pos.coords.latitude;
+let lon = pos.coords.longitude;
+
+let makkahLat = 21.4225 * Math.PI/180;
+let makkahLon = 39.8262 * Math.PI/180;
+
+lat = lat * Math.PI/180;
+lon = lon * Math.PI/180;
+
+let dLon = makkahLon - lon;
+
+let y = Math.sin(dLon) * Math.cos(makkahLat);
+let x = Math.cos(lat)*Math.sin(makkahLat) -
+Math.sin(lat)*Math.cos(makkahLat)*Math.cos(dLon);
+
+let brng = Math.atan2(y,x);
+
+qibla = (brng * 180/Math.PI + 360) % 360;
+
+});
+
+window.addEventListener("deviceorientation", function(e){
+
+let compass = e.alpha;
+
+let direction = qibla - compass;
+
+document.getElementById("needle").style.transform =
+"translate(-50%,-50%) rotate("+direction+"deg)";
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

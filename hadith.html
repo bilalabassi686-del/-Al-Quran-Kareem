@@ -1,0 +1,20 @@
+<section id="hadith" class="hidden">
+  <h2>🌙 Daily Hadith</h2>
+  <p>Apni device se Hadith image select karein (sirf aap ke liye).</p>
+
+  <!-- Image upload button -->
+  <input type="file" accept="image/*" id="hadithUpload" onchange="loadHadith(event)">
+  <br><br>
+
+  <!-- Display selected image -->
+  <img id="hadithImg" style="max-width:100%; display:none; border-radius:10px; box-shadow:0 0 5px rgba(0,0,0,0.3);">
+
+  <!-- JS -->
+  <script>
+    function loadHadith(event){
+      const img = document.getElementById('hadithImg');
+      img.src = URL.createObjectURL(event.target.files[0]);
+      img.style.display = 'block';
+    }
+  </script>
+</section>

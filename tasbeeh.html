@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3D Digital Tasbeeh</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f2f6f5;
+text-align:center;
+}
+
+header{
+background:#0a7b3e;
+color:white;
+padding:15px;
+font-size:22px;
+}
+
+.counter{
+font-size:60px;
+margin-top:20px;
+color:#0a7b3e;
+}
+
+.mode{
+font-size:20px;
+margin-top:10px;
+color:#333;
+}
+
+.tasbeeh{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+width:300px;
+margin:30px auto;
+}
+
+.bead{
+width:28px;
+height:28px;
+margin:4px;
+border-radius:50%;
+background:linear-gradient(145deg,#ffffff,#cfcfcf);
+box-shadow:
+4px 4px 8px rgba(0,0,0,0.3),
+-4px -4px 8px rgba(255,255,255,0.8);
+}
+
+.active{
+background:linear-gradient(145deg,#0a7b3e,#11b36a);
+}
+
+button{
+padding:10px 20px;
+margin:6px;
+border:none;
+border-radius:10px;
+background:#0a7b3e;
+color:white;
+font-size:16px;
+}
+
+select{
+padding:8px;
+margin-top:10px;
+font-size:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>📿 3D Digital Tasbeeh</header>
+
+<div class="counter" id="count">0</div>
+
+<div class="mode" id="mode">SubhanAllah</div>
+
+<select id="limit">
+<option value="33">33</option>
+<option value="100">100</option>
+<option value="1000">1000</option>
+</select>
+
+<br><br>
+
+<button onclick="setMode('SubhanAllah')">SubhanAllah</button>
+<button onclick="setMode('Alhamdulillah')">Alhamdulillah</button>
+<button onclick="setMode('Allahu Akbar')">Allahu Akbar</button>
+
+<div class="tasbeeh" id="tasbeeh"></div>
+
+<button onclick="zikr()">Tap Tasbeeh</button>
+<button onclick="reset()">Reset</button>
+
+<audio id="sound">
+<source src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg">
+</audio>
+
+<script>
+
+let count = 0;
+
+let tasbeeh = document.getElementById("tasbeeh");
+
+for(let i=0;i<33;i++){
+
+let bead=document.createElement("div");
+
+bead.className="bead";
+
+tasbeeh.appendChild(bead);
+
+}
+
+function zikr(){
+
+let limit = document.getElementById("limit").value;
+
+if(count < limit){
+
+document.getElementById("count").innerText = ++count;
+
+document.getElementById("sound").play();
+
+if(navigator.vibrate){
+navigator.vibrate(50);
+}
+
+let beads=document.getElementsByClassName("bead");
+
+if(count<=beads.length){
+beads[count-1].classList.add("active");
+}
+
+}
+
+}
+
+function reset(){
+
+count=0;
+
+document.getElementById("count").innerText=0;
+
+let beads=document.getElementsByClassName("bead");
+
+for(let i=0;i<beads.length;i++){
+beads[i].classList.remove("active");
+}
+
+}
+
+function setMode(name){
+
+document.getElementById("mode").innerText=name;
+
+}
+
+</script>
+
+</body>
+</html>
+
+<style>
+
+.autoBox{
+margin-top:20px;
+}
+
+.record{
+margin-top:20px;
+font-size:18px;
+color:#333;
+}
+
+.speed{
+margin-top:10px;
+}
+
+</style>
+
+<div class="autoBox">
+
+<h3>Auto Tasbeeh</h3>
+
+<button onclick="startAuto()">Start Auto</button>
+<button onclick="stopAuto()">Stop</button>
+
+<div class="speed">
+Speed
+<select id="speed">
+<option value="1000">Slow</option>
+<option value="500">Medium</option>
+<option value="200">Fast</option>
+</select>
+</div>
+
+</div>
+
+<div class="record">
+
+📊 Today Tasbeeh Count:  
+<span id="daily">0</span>
+
+</div>
+
+<script>
+
+let autoTasbeeh;
+
+let todayCount = localStorage.getItem("tasbeehToday");
+
+if(todayCount==null){
+
+todayCount=0;
+
+}
+
+document.getElementById("daily").innerText=todayCount;
+
+function startAuto(){
+
+let speed=document.getElementById("speed").value;
+
+autoTasbeeh=setInterval(function(){
+
+zikr();
+
+todayCount++;
+
+localStorage.setItem("tasbeehToday",todayCount);
+
+document.getElementById("daily").innerText=todayCount;
+
+},speed);
+
+}
+
+function stopAuto(){
+
+clearInterval(autoTasbeeh);
+
+}
+
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Digital Tasbeeh</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:white;
+  text-align:center;
+}
+
+.tasbeeh-box{
+  background:white;
+  color:black;
+  padding:30px;
+  border-radius:20px;
+  width:280px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.count{
+  font-size:50px;
+  margin:20px 0;
+  font-weight:bold;
+}
+
+button{
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:10px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.add{
+  background:#27ae60;
+  color:white;
+}
+
+.reset{
+  background:#e74c3c;
+  color:white;
+}
+
+.zikr{
+  font-size:20px;
+  margin-top:10px;
+  color:#2c3e50;
+}
+</style>
+</head>
+
+<body>
+
+<div class="tasbeeh-box">
+
+<h2>📿 Digital Tasbeeh</h2>
+
+<div class="count" id="count">0</div>
+
+<button class="add" onclick="add()">SubhanAllah</button>
+
+<button class="reset" onclick="reset()">Reset</button>
+
+<div class="zikr">
+SubhanAllah • Alhamdulillah • Allahu Akbar
+</div>
+
+</div>
+
+<script>
+
+let count = 0;
+
+function add(){
+count++;
+document.getElementById("count").innerText = count;
+}
+
+function reset(){
+count = 0;
+document.getElementById("count").innerText = count;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📜 قرآن مجید - 30 پارے</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+<style>
+body { font-family:'Amiri', serif; margin:0; padding:0; background:#f9f9f9; }
+header { background:#0f9d8a; color:white; text-align:center; padding:12px; font-size:1.5rem; }
+.juzList { padding:10px; }
+.juz-btn {
+  background:#fff; border:1px solid #0f9d8a; padding:12px; margin:6px 0; border-radius:8px;
+  cursor:pointer; font-size:18px; color:#0f9d8a; text-align:center;
+}
+.juz-btn:hover { background:#e0ffe0; }
+#reader { padding:12px; display:none; }
+#juzTitle { text-align:center; font-size:20px; margin-bottom:15px; }
+.ayah { font-size:22px; line-height:2; direction:rtl; text-align:right; margin:6px 0; word-wrap:break-word; }
+.ayah-number { font-size:18px; color:#0f9d8a; margin-left:5px; }
+.audio-player { width:100%; margin-top:10px; }
+button.back-btn { background:#0f9d8a; color:white; padding:10px; width:100%; border:none; border-radius:6px;
+  font-size:18px; margin-top:12px; cursor:pointer; }
+button.back-btn:hover { background:#228B22; }
+@media(max-width:600px){
+  header{font-size:1.3rem; padding:10px;}
+  .ayah{font-size:20px; line-height:1.8;}
+  .ayah-number{font-size:16px;}
+  .juz-btn{font-size:16px; padding:10px;}
+  button.back-btn{font-size:16px; padding:8px;}
+}
+</style>
+</head>
+<body>
+
+<header>📜 قرآن مجید - 30 پارے</header>
+
+<div class="juzList" id="juzList"></div>
+
+<div id="reader">
+  <div id="juzTitle"></div>
+  <div id="juzArabic">لطفاً انتظار کریں...</div>
+  <audio id="audioPlayer" class="audio-player" controls></audio>
+  <button class="back-btn" onclick="backToList()">🔙 واپس لسٹ</button>
+</div>
+
+<script>
+// Juz Bit.ly audio links
+const juzAudioLinks = [
+  "http://bit.ly/2qpLHGY","http://bit.ly/2qnS2Ha","http://bit.ly/2sbSqoq","http://bit.ly/2r6TOeq",
+  "http://bit.ly/2qzzsYk","http://bit.ly/2qI4EE2","http://bit.ly/2rW88HS","http://bit.ly/2qK0aO4",
+  "http://bit.ly/2rBqzB0","http://bit.ly/2s3dkdd","http://bit.ly/2so5po5","http://bit.ly/2rzgVP9",
+  "http://bit.ly/2rSIJ1l","http://bit.ly/2sk5Lid","http://bit.ly/2rKJHw3","http://bit.ly/2sMTr7y",
+  "http://bit.ly/2r9opp2","http://bit.ly/2rpK4c8","http://bit.ly/2rpq1iW","http://bit.ly/2rAX4Mc",
+  "http://bit.ly/2rBv2Aa","http://bit.ly/2sbmkft","http://bit.ly/2rtPXpH","http://bit.ly/2sfUCOE",
+  "http://bit.ly/2smfZxF","http://bit.ly/2tLUEvC","http://bit.ly/2tru5wz","http://bit.ly/2rXeW98",
+  "http://bit.ly/2s5NLEk","http://bit.ly/2s1BBB4"
+];
+
+// Create Juz buttons
+const listDiv = document.getElementById("juzList");
+for(let i=1;i<=30;i++){
+  const btn = document.createElement("div");
+  btn.className = "juz-btn";
+  btn.innerText = "پارہ " + i;
+  btn.onclick = () => openJuz(i);
+  listDiv.appendChild(btn);
+}
+
+function openJuz(num){
+  document.getElementById("juzList").style.display="none";
+  document.getElementById("reader").style.display="block";
+  document.getElementById("juzTitle").innerText = "📖 پارہ " + num;
+  document.getElementById("juzArabic").innerHTML="لطفاً انتظار کریں...";
+
+  // Load Arabic text via API (first surah in Juz, then all ayahs)
+  fetch(`https://api.alquran.cloud/v1/juz/${num}/quran-uthmani`)
+  .then(res => res.json())
+  .then(d => {
+    let html="";
+    d.data.ayahs.forEach(a=>{
+      html += `<div class="ayah">${a.text} <span class="ayah-number">(${a.numberInSurah})</span></div>`;
+    });
+    document.getElementById("juzArabic").innerHTML=html;
+  });
+
+  document.getElementById("audioPlayer").src = juzAudioLinks[num-1];
+}
+
+function backToList(){
+  document.getElementById("reader").style.display="none";
+  document.getElementById("juzList").style.display="block";
+}
+</script>
+
+</body>
+</html>

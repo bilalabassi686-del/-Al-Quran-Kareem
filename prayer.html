@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Prayer Time</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f5132;
+color:white;
+text-align:center;
+margin:0;
+}
+
+header{
+background:#064e3b;
+padding:20px;
+font-size:24px;
+}
+
+#city{
+font-size:18px;
+margin-top:10px;
+}
+
+.container{
+margin-top:30px;
+}
+
+.card{
+background:white;
+color:black;
+margin:10px auto;
+padding:15px;
+width:80%;
+border-radius:10px;
+font-size:18px;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:8px;
+background:#16a34a;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🕌 Prayer Time
+</header>
+
+<div id="city">Detecting Location...</div>
+
+<div class="container">
+
+<div class="card">Fajr: <span id="fajr">--</span></div>
+<div class="card">Dhuhr: <span id="dhuhr">--</span></div>
+<div class="card">Asr: <span id="asr">--</span></div>
+<div class="card">Maghrib: <span id="maghrib">--</span></div>
+<div class="card">Isha: <span id="isha">--</span></div>
+
+</div>
+
+<button onclick="getLocation()">🔄 Refresh</button>
+
+<script>
+
+function getLocation(){
+
+if(navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+let lat = position.coords.latitude
+let lon = position.coords.longitude
+
+fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=2`)
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("fajr").innerHTML = data.data.timings.Fajr
+document.getElementById("dhuhr").innerHTML = data.data.timings.Dhuhr
+document.getElementById("asr").innerHTML = data.data.timings.Asr
+document.getElementById("maghrib").innerHTML = data.data.timings.Maghrib
+document.getElementById("isha").innerHTML = data.data.timings.Isha
+
+})
+
+})
+
+}else{
+
+alert("Location not supported")
+
+}
+
+}
+
+getLocation()
+
+</script>
+
+</body>
+</html>
