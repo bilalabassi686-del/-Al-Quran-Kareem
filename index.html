@@ -13,37 +13,54 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f4f6f7;
+background:#f2f6ff;
 }
 
+/* Header */
+
 header{
-background:#0a7b3e;
+background:linear-gradient(45deg,#0a7b3e,#00b894);
 color:white;
 text-align:center;
-padding:15px;
+padding:18px;
 font-size:22px;
+font-weight:bold;
+box-shadow:0 3px 8px rgba(0,0,0,0.2);
 }
+
+/* Menu Grid */
 
 .menu{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:10px;
+gap:12px;
 padding:15px;
+max-width:700px;
+margin:auto;
 }
+
+/* Card Design */
 
 .card{
 background:white;
 padding:20px;
-border-radius:10px;
+border-radius:12px;
 text-align:center;
-font-size:18px;
-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+font-size:17px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
 cursor:pointer;
+border-left:5px solid #2b7cff;
+transition:0.2s;
+}
+
+/* Hover Effect */
+
+.card:hover{
+transform:scale(1.03);
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
 
 </style>
-</head>
-
 <body>
 
 <header>

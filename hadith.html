@@ -1,20 +1,79 @@
+<style>
+
+#hadith{
+max-width:700px;
+margin:auto;
+padding:15px;
+}
+
+#hadith h2{
+text-align:center;
+color:#0a7b3e;
+margin-bottom:10px;
+}
+
+/* Hadith Card */
+
+.hadith-box{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+border-left:5px solid #2b7cff;
+text-align:center;
+}
+
+/* Upload Button */
+
+#hadithUpload{
+background:#2b7cff;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* Image */
+
+#hadithImg{
+margin-top:15px;
+max-width:100%;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+</style>
+
+
 <section id="hadith" class="hidden">
-  <h2>🌙 Daily Hadith</h2>
-  <p>Apni device se Hadith image select karein (sirf aap ke liye).</p>
 
-  <!-- Image upload button -->
-  <input type="file" accept="image/*" id="hadithUpload" onchange="loadHadith(event)">
-  <br><br>
+<div class="hadith-box">
 
-  <!-- Display selected image -->
-  <img id="hadithImg" style="max-width:100%; display:none; border-radius:10px; box-shadow:0 0 5px rgba(0,0,0,0.3);">
+<h2> Daily Hadith</h2>
 
-  <!-- JS -->
-  <script>
-    function loadHadith(event){
-      const img = document.getElementById('hadithImg');
-      img.src = URL.createObjectURL(event.target.files[0]);
-      img.style.display = 'block';
-    }
-  </script>
+
+
+<input type="file" accept="image/*" id="hadithUpload" onchange="loadHadith(event)">
+
+<br><br>
+
+<img id="hadithImg" style="display:none;">
+
+</div>
+
+<script>
+
+function loadHadith(event){
+
+const img = document.getElementById('hadithImg');
+
+img.src = URL.createObjectURL(event.target.files[0]);
+
+img.style.display = 'block';
+
+}
+
+</script>
+
 </section>
