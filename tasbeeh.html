@@ -3,45 +3,49 @@
 #tasbeeh{
 max-width:700px;
 margin:auto;
-padding:15px;
+padding:20px;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+border-radius:20px;
 }
 
 /* Card */
 
 .tasbeeh-box{
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-border-left:6px solid #2b7cff;
+background:linear-gradient(145deg,#ffffff,#e6e9f0);
+padding:30px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,0.25);
+border:2px solid #2b7cff;
 text-align:center;
 }
 
 /* Dark Mode */
 
 .dark{
-background:#1e272e;
+background:#0f2027;
 color:white;
 }
 
 .dark .tasbeeh-box{
-background:#2f3640;
+background:linear-gradient(145deg,#2f3640,#353b48);
 }
 
 /* Counter */
 
 .counter{
-font-size:45px;
+font-size:50px;
 font-weight:bold;
 margin:20px 0;
 color:#2b7cff;
+text-shadow:0 0 10px rgba(43,124,255,0.7);
 }
 
 /* Zikr */
 
 .zikr{
-font-size:18px;
+font-size:20px;
 margin-bottom:15px;
+font-weight:bold;
 }
 
 /* Beads */
@@ -50,19 +54,23 @@ margin-bottom:15px;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-margin-bottom:15px;
+margin-bottom:20px;
 }
 
 .bead{
-width:14px;
-height:14px;
-margin:4px;
+width:16px;
+height:16px;
+margin:5px;
 border-radius:50%;
-background:#dcdde1;
+background:linear-gradient(145deg,#dcdde1,#f5f6fa);
+box-shadow:inset 2px 2px 5px rgba(0,0,0,0.2),
+2px 2px 5px rgba(0,0,0,0.2);
+transition:0.2s;
 }
 
 .active{
-background:#2b7cff;
+background:linear-gradient(145deg,#2b7cff,#1d5fd1);
+box-shadow:0 0 10px rgba(43,124,255,0.8);
 }
 
 /* Buttons */
@@ -71,30 +79,35 @@ background:#2b7cff;
 background:linear-gradient(145deg,#2b7cff,#1d5fd1);
 color:white;
 border:none;
-padding:18px 30px;
-font-size:20px;
+padding:20px 35px;
+font-size:22px;
 border-radius:50px;
 cursor:pointer;
-box-shadow:0 8px 20px rgba(0,0,0,0.25);
-margin:5px;
+box-shadow:0 10px 25px rgba(0,0,0,0.35);
+margin:6px;
+transition:0.2s;
+}
+
+.countBtn:active{
+transform:scale(0.95);
 }
 
 .modeBtn{
-background:#00b894;
+background:linear-gradient(145deg,#00b894,#00a383);
 color:white;
 border:none;
-padding:8px 15px;
-margin:5px;
-border-radius:8px;
+padding:9px 16px;
+margin:6px;
+border-radius:10px;
 cursor:pointer;
 }
 
 .resetBtn{
-background:#ff4757;
+background:linear-gradient(145deg,#ff4757,#d63031);
 color:white;
 border:none;
 padding:10px 20px;
-border-radius:8px;
+border-radius:10px;
 cursor:pointer;
 }
 
@@ -102,7 +115,7 @@ cursor:pointer;
 background:#333;
 color:white;
 border:none;
-padding:8px 15px;
+padding:8px 16px;
 margin-top:10px;
 border-radius:8px;
 cursor:pointer;
@@ -111,11 +124,11 @@ cursor:pointer;
 </style>
 
 
-<section id="tasbeeh" class="hidden">
+<section id="tasbeeh">
 
 <div class="tasbeeh-box">
 
-<h2> Digital Tasbeeh</h2>
+<h2>🕌 Digital Tasbeeh</h2>
 
 <div class="zikr" id="zikrName">SubhanAllah</div>
 
@@ -145,7 +158,6 @@ cursor:pointer;
 <button class="darkBtn" onclick="toggleDark()">Dark Mode</button>
 
 </div>
-
 
 <script>
 

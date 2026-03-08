@@ -13,95 +13,127 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f2f6ff;
+min-height:100vh;
+
+background:linear-gradient(-45deg,#0f9d8a,#0a6cff,#00c6ff,#43e97b);
+background-size:400% 400%;
+animation:bgMove 10s ease infinite;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
 /* Header */
 
 header{
-background:linear-gradient(45deg,#0a7b3e,#00b894);
-color:white;
 text-align:center;
-padding:18px;
-font-size:22px;
+padding:20px;
+font-size:26px;
 font-weight:bold;
-box-shadow:0 3px 8px rgba(0,0,0,0.2);
+color:white;
 }
 
-/* Menu Grid */
+/* Grid */
 
 .menu{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:12px;
-padding:15px;
+gap:18px;
+padding:20px;
 max-width:700px;
 margin:auto;
 }
 
-/* Card Design */
+/* Cards */
 
 .card{
-background:white;
-padding:20px;
-border-radius:12px;
-text-align:center;
-font-size:17px;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
-cursor:pointer;
-border-left:5px solid #2b7cff;
-transition:0.2s;
-}
 
-/* Hover Effect */
+aspect-ratio:1/1;
+
+border-radius:18px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+font-size:18px;
+font-weight:bold;
+
+color:white;
+
+box-shadow:0 8px 25px rgba(0,0,0,0.3);
+cursor:pointer;
+transition:0.35s;
+
+backdrop-filter:blur(5px);
+}
 
 .card:hover{
-transform:scale(1.03);
-box-shadow:0 6px 15px rgba(0,0,0,0.15);
+transform:scale(1.08);
+box-shadow:0 12px 30px rgba(0,0,0,0.4);
 }
 
+/* Card gradients */
+
+.quran{background:linear-gradient(135deg,#00c6ff,#0072ff);}
+.para{background:linear-gradient(135deg,#43e97b,#38f9d7);}
+.tasbeeh{background:linear-gradient(135deg,#f7971e,#ffd200);}
+.qibla{background:linear-gradient(135deg,#ff6a00,#ee0979);}
+.dua{background:linear-gradient(135deg,#8e2de2,#4a00e0);}
+.allah{background:linear-gradient(135deg,#11998e,#38ef7d);}
+.prayer{background:linear-gradient(135deg,#fc4a1a,#f7b733);}
+.hadith{background:linear-gradient(135deg,#2193b0,#6dd5ed);}
+.settings{background:linear-gradient(135deg,#757f9a,#d7dde8);color:black;}
+
 </style>
+
+</head>
+
 <body>
 
 <header>
-Al Quran Kareem
+📖 Al Quran Kareem
 </header>
 
 <div class="menu">
 
-<div class="card" onclick="location.href='quran.html'">
+<div class="card quran" onclick="location.href='quran.html'">
 📖 Surah + Audio
 </div>
 
-<div class="card" onclick="location.href='para.html'">
-📜 Para (Juz) + Audio
+<div class="card para" onclick="location.href='para.html'">
+📜 Para (Juz)
 </div>
 
-<div class="card" onclick="location.href='tasbeeh.html'">
-📿 Digital Tasbeeh
+<div class="card tasbeeh" onclick="location.href='tasbeeh.html'">
+📿 Tasbeeh
 </div>
 
-<div class="card" onclick="location.href='qibla.html'">
-🧭 Qibla Direction
+<div class="card qibla" onclick="location.href='qibla.html'">
+🧭 Qibla
 </div>
 
-<div class="card" onclick="location.href='dua.html'">
-🤲 Dua Collection
+<div class="card dua" onclick="location.href='dua.html'">
+🤲 Dua
 </div>
 
-<div class="card" onclick="location.href='allah.html'">
-🕌 99 Names of Allah
+<div class="card allah" onclick="location.href='allah.html'">
+🕌 99 Names
 </div>
 
-<div class="card" onclick="location.href='prayer.html'">
+<div class="card prayer" onclick="location.href='prayer.html'">
 🕌 Prayer Time
 </div>
 
-<div class="card" onclick="location.href='hadith.html'">
+<div class="card hadith" onclick="location.href='hadith.html'">
 🌙 Daily Hadith
 </div>
 
-<div class="card" onclick="location.href='settings.html'">
+<div class="card settings" onclick="location.href='settings.html'">
 ⚙️ Settings
 </div>
 
